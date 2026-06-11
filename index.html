@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Creator Revenue Calculator | YouTube, TikTok, AdSense, RPM | pratix.io</title>
+  <meta name="description" content="Estimate AdSense, website, YouTube, TikTok, Instagram, podcast and newsletter revenue by country. A privacy-first, no-database creator revenue calculator from pratix.io." />
+  <meta name="keywords" content="ad revenue calculator, YouTube money calculator, TikTok earnings calculator, RPM calculator, creator revenue calculator, AdSense RPM calculator" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .ad-slot { background: repeating-linear-gradient(45deg, #f8fafc, #f8fafc 12px, #eff6ff 12px, #eff6ff 24px); }
+    .hidden-panel { display: none; }
+    input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { opacity: .35; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-950 antialiased">
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <a href="https://pratix.io" class="flex items-center gap-3" aria-label="Back to pratix.io">
+        <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-600 text-lg font-black text-white shadow-sm">P</span>
+        <span><span class="block text-lg font-black tracking-tight">pratix.io</span><span class="block text-xs font-medium text-slate-500">Premium Micro-SaaS Web Tools</span></span>
+      </a>
+      <nav class="flex flex-wrap items-center gap-3 text-sm font-semibold text-slate-600">
+        <a href="#calculator" class="hover:text-blue-700" data-i18n="navCalculator">Calculator</a>
+        <a href="#platforms" class="hover:text-blue-700" data-i18n="navPlatforms">Platforms</a>
+        <a href="#seo" class="hover:text-blue-700" data-i18n="navSeo">Search terms</a>
+        <a href="#saved" class="hover:text-blue-700" data-i18n="navSaved">Saved</a>
+        <a href="https://pratix.io" class="hover:text-blue-700">All tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <section class="grid gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+      <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-9">
+        <div class="mb-5 flex flex-wrap gap-3">
+          <label class="text-sm font-bold text-slate-700"><span data-i18n="language">Language</span><select id="language" class="ml-2 rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none ring-blue-200 focus:ring-4"></select></label>
+          <label class="text-sm font-bold text-slate-700"><span data-i18n="country">Country</span><select id="country" class="ml-2 rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none ring-blue-200 focus:ring-4"></select></label>
+        </div>
+        <p class="mb-4 inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700 ring-1 ring-blue-100" data-i18n="badge">100% client-side · no signup · no database</p>
+        <h1 class="max-w-4xl text-4xl font-black tracking-tight text-slate-950 md:text-6xl" data-i18n="heroTitle">Free Creator Revenue Calculator</h1>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-600" data-i18n="heroText">Estimate website ad revenue, YouTube earnings, TikTok creator income, Instagram/Reels sponsorships and podcast/newsletter CPM revenue by country. Everything runs locally in your browser.</p>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a href="#calculator" class="rounded-2xl bg-blue-600 px-5 py-3 text-center font-bold text-white shadow-sm hover:bg-blue-700" data-i18n="start">Start calculating</a>
+          <button id="loadExampleBtn" class="rounded-2xl border border-slate-300 bg-white px-5 py-3 font-bold text-slate-800 hover:bg-slate-100" data-i18n="example">Load example</button>
+        </div>
+        <div class="mt-7 grid gap-3 sm:grid-cols-3">
+          <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200"><p class="text-sm font-bold text-slate-900" data-i18n="card1Title">Multi-platform</p><p class="mt-1 text-sm text-slate-500" data-i18n="card1Text">Web, YouTube, TikTok, Reels, podcast and newsletter.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200"><p class="text-sm font-bold text-slate-900" data-i18n="card2Title">Country presets</p><p class="mt-1 text-sm text-slate-500" data-i18n="card2Text">Starter RPM/CPM assumptions by market.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200"><p class="text-sm font-bold text-slate-900" data-i18n="card3Title">SEO coverage</p><p class="mt-1 text-sm text-slate-500" data-i18n="card3Text">Built-in multilingual search term clusters.</p></div>
+        </div>
+      </div>
+      <aside class="ad-slot flex min-h-[300px] flex-col justify-center rounded-[2rem] border border-dashed border-blue-200 p-6 text-center text-slate-500">
+        <p class="text-sm font-bold uppercase tracking-widest">Advertisement Space</p>
+        <p class="mt-2 text-2xl font-black text-slate-700">Top Leaderboard</p>
+        <p class="mt-2 text-sm">Responsive AdSense unit for high-intent calculator traffic.</p>
+      </aside>
+    </section>
+
+    <section id="calculator" class="mt-8 grid gap-6 lg:grid-cols-[430px_1fr]">
+      <form id="calcForm" class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+        <div class="flex items-start justify-between gap-3">
+          <div><h2 class="text-2xl font-black" data-i18n="inputsTitle">Calculator inputs</h2><p class="mt-1 text-sm text-slate-500" data-i18n="inputsText">Choose a platform and adjust assumptions.</p></div>
+          <button type="reset" class="rounded-xl border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100" data-i18n="reset">Reset</button>
+        </div>
+        <div class="mt-5 grid gap-4">
+          <label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="scenario">Scenario name</span><input id="scenarioName" type="text" value="Creator Base Case" class="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label>
+          <label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="platform">Platform</span><select id="platform" class="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none ring-blue-200 focus:ring-4"><option value="website">Website / AdSense</option><option value="youtube">YouTube Long-form</option><option value="shorts">YouTube Shorts</option><option value="tiktok">TikTok</option><option value="instagram">Instagram / Reels</option><option value="podcast">Podcast / Newsletter</option></select></label>
+          <div id="webInputs" class="grid gap-4">
+            <div class="grid grid-cols-2 gap-3"><label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="pageviews">Monthly pageviews</span><input id="pageviews" type="number" min="0" step="1000" value="100000" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label><label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="adsPerPage">Ads per page</span><input id="adsPerPage" type="number" min="0" step="0.1" value="3" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label></div>
+            <div class="grid grid-cols-2 gap-3"><label class="block"><span class="text-sm font-semibold text-slate-700">CTR (%)</span><input id="ctr" type="number" min="0" step="0.01" value="1.2" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label><label class="block"><span class="text-sm font-semibold text-slate-700">CPC</span><input id="cpc" type="number" min="0" step="0.01" value="0.55" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label></div>
+            <label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="fillRate">Fill rate (%)</span><input id="fillRate" type="number" min="0" max="100" step="1" value="92" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label>
+          </div>
+          <div id="creatorInputs" class="grid gap-4 hidden-panel">
+            <label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="views">Monthly views / impressions</span><input id="views" type="number" min="0" step="1000" value="250000" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label>
+            <div class="grid grid-cols-2 gap-3"><label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="rpmCpm">RPM / CPM</span><input id="creatorRpm" type="number" min="0" step="0.01" value="4.50" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label><label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="sponsor">Monthly sponsor income</span><input id="sponsorIncome" type="number" min="0" step="10" value="0" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label></div>
+            <label id="slotsWrap" class="block hidden-panel"><span class="text-sm font-semibold text-slate-700" data-i18n="slots">Sponsor slots</span><input id="slots" type="number" min="1" step="1" value="2" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label>
+          </div>
+          <div class="grid grid-cols-2 gap-3"><label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="growth">Monthly growth (%)</span><input id="growth" type="number" min="-99" step="0.1" value="4" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label><label class="block"><span class="text-sm font-semibold text-slate-700" data-i18n="rpmOverride">Manual RPM override</span><input id="rpmOverride" type="number" min="0" step="0.01" placeholder="Optional" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-blue-200 focus:ring-4" /></label></div>
+          <button type="submit" class="rounded-2xl bg-blue-600 px-5 py-3 font-black text-white shadow-sm hover:bg-blue-700" data-i18n="calculate">Calculate revenue</button>
+        </div>
+      </form>
+
+      <section class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+        <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+          <div><h2 class="text-2xl font-black" data-i18n="outputTitle">Revenue output</h2><p id="summaryText" class="mt-1 text-slate-500">Your estimated results will appear here.</p></div>
+          <div class="flex flex-wrap gap-2"><button id="saveScenarioBtn" type="button" class="rounded-xl border border-slate-300 px-3 py-2 text-sm font-bold text-slate-700 hover:bg-slate-100" data-i18n="save">Save</button><button id="pdfBtn" type="button" class="rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-bold text-blue-700 hover:bg-blue-100">PDF</button></div>
+        </div>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <article class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200"><p class="text-sm text-slate-500" data-i18n="monthlyRevenue">Monthly revenue</p><p id="monthlyRevenue" class="mt-2 text-2xl font-black text-blue-700">—</p></article>
+          <article class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200"><p class="text-sm text-slate-500" data-i18n="annualRevenue">Annual revenue</p><p id="annualRevenue" class="mt-2 text-2xl font-black text-blue-700">—</p></article>
+          <article class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200"><p class="text-sm text-slate-500" data-i18n="effectiveRpm">Effective RPM/CPM</p><p id="effectiveRpm" class="mt-2 text-2xl font-black text-blue-700">—</p></article>
+          <article class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200"><p class="text-sm text-slate-500" data-i18n="activityMetric">Clicks / base units</p><p id="activityMetric" class="mt-2 text-2xl font-black text-blue-700">—</p></article>
+        </div>
+        <div class="mt-6 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200"><div class="flex items-center justify-between gap-3"><h3 class="font-black" data-i18n="projectionTitle">12-month revenue projection</h3><p class="text-xs text-slate-500" data-i18n="projectionText">Based on monthly growth</p></div><div class="mt-4 h-[320px]"><canvas id="revenueChart"></canvas></div></div>
+      </section>
+    </section>
+
+    <section class="mt-6 grid gap-6 lg:grid-cols-[1fr_360px]">
+      <div class="overflow-x-auto rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm md:p-6"><h2 class="text-2xl font-black" data-i18n="tableTitle">Projection table</h2><p class="mt-1 text-sm text-slate-500" data-i18n="tableText">Month-by-month estimate for traffic and monetization targets.</p><table class="mt-4 min-w-full text-left text-sm"><thead class="text-slate-600"><tr class="border-b border-slate-200"><th class="py-3 pr-4" data-i18n="month">Month</th><th class="py-3 pr-4" data-i18n="volume">Volume</th><th class="py-3 pr-4" data-i18n="revenue">Revenue</th><th class="py-3 pr-4">RPM/CPM</th></tr></thead><tbody id="projectionTable" class="divide-y divide-slate-100 text-slate-700"></tbody></table></div>
+      <aside class="space-y-6"><div class="ad-slot flex min-h-[260px] flex-col justify-center rounded-[2rem] border border-dashed border-blue-200 p-6 text-center text-slate-500"><p class="text-sm font-bold uppercase tracking-widest">Advertisement Space</p><p class="mt-2 text-xl font-black text-slate-700">Results Native Unit</p><p class="mt-2 text-sm">Place after primary results to protect UX and increase session depth.</p></div><div class="rounded-[2rem] border border-blue-100 bg-blue-50 p-6"><h3 class="text-xl font-black text-blue-950" data-i18n="supportTitle">Support free tools</h3><p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="supportText">If this saved you time, support privacy-first browser tools with a coffee-style donation.</p><a href="https://www.buymeacoffee.com/" target="_blank" rel="noopener" class="mt-4 inline-flex rounded-2xl bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700">Buy Me a Coffee</a></div></aside>
+    </section>
+
+    <section id="platforms" class="mt-6 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+      <h2 class="text-3xl font-black" data-i18n="platformsTitle">Supported monetization platforms</h2>
+      <div class="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3" id="platformCards"></div>
+    </section>
+
+    <section id="seo" class="mt-6 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+      <h2 class="text-3xl font-black" data-i18n="seoTitle">Multilingual search intent coverage</h2>
+      <p class="mt-3 max-w-4xl leading-8 text-slate-600" data-i18n="seoIntro">This tool supports short-tail and long-tail search intents across creator monetization, YouTube income, TikTok earnings, AdSense RPM and sponsorship calculators.</p>
+      <div class="mt-6 grid gap-4 lg:grid-cols-2"><div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><h3 class="font-black" data-i18n="shortTail">Short-tail keywords</h3><div id="shortKeywords" class="mt-3 flex flex-wrap gap-2"></div></div><div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><h3 class="font-black" data-i18n="longTail">Long-tail keywords</h3><div id="longKeywords" class="mt-3 flex flex-wrap gap-2"></div></div></div>
+    </section>
+
+    <section id="saved" class="mt-6 rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm md:p-6"><div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><div><h2 class="text-2xl font-black" data-i18n="savedTitle">Saved scenarios</h2><p class="mt-1 text-sm text-slate-500" data-i18n="savedText">Saved locally in this browser only. No backend or database is used.</p></div><button id="clearSavedBtn" class="rounded-xl border border-red-200 px-3 py-2 text-sm font-bold text-red-700 hover:bg-red-50" data-i18n="clearAll">Clear all</button></div><div id="savedScenarios" class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3"></div></section>
+
+    <section class="mt-6 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-8"><h2 class="text-3xl font-black" data-i18n="guideTitle">Important note about revenue estimates</h2><div class="mt-4 grid gap-6 text-slate-600 lg:grid-cols-2"><p class="leading-8" data-i18n="guideP1">Use the presets as a starting point only. Real earnings depend on niche, country mix, audience quality, ad inventory, viewability, seasonality, platform rules and sponsorship demand.</p><p class="leading-8" data-i18n="guideP2">This single-file app is designed for planning and comparison. It does not guarantee any payout and it does not send your inputs to a server.</p></div></section>
+  </main>
+
+  <footer class="mt-10 border-t border-slate-200 bg-white py-8 text-center text-sm text-slate-500"><p>pratix.io · revenue.pratix.io · Single-file no-database MVP · All processing happens locally in your browser.</p></footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const storageKey = 'pratixCreatorRevenueScenarios.v2';
+    let chart;
+    let latestResult = null;
+
+    const languages = {
+      "EN": {
+            "name": "English (EN)",
+            "locale": "en-US",
+            "country": "US",
+            "t": {
+                  "navCalculator": "Calculator",
+                  "navPlatforms": "Platforms",
+                  "navSeo": "Search terms",
+                  "navSaved": "Saved",
+                  "language": "Language",
+                  "country": "Country",
+                  "badge": "100% client-side · no signup · no database",
+                  "heroTitle": "Free Creator Revenue Calculator",
+                  "heroText": "Estimate website ad revenue, YouTube earnings, TikTok creator income, Instagram/Reels sponsorships and podcast/newsletter CPM revenue by country. Everything runs locally in your browser.",
+                  "start": "Start calculating",
+                  "example": "Load example",
+                  "card1Title": "Multi-platform",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast and newsletter.",
+                  "card2Title": "Country presets",
+                  "card2Text": "Starter RPM/CPM assumptions by market.",
+                  "card3Title": "SEO coverage",
+                  "card3Text": "Built-in multilingual search term clusters.",
+                  "inputsTitle": "Calculator inputs",
+                  "inputsText": "Choose a platform and adjust assumptions.",
+                  "reset": "Reset",
+                  "scenario": "Scenario name",
+                  "platform": "Platform",
+                  "pageviews": "Monthly pageviews",
+                  "adsPerPage": "Ads per page",
+                  "fillRate": "Fill rate (%)",
+                  "views": "Monthly views / impressions",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Monthly sponsor income",
+                  "slots": "Sponsor slots",
+                  "growth": "Monthly growth (%)",
+                  "rpmOverride": "Manual RPM override",
+                  "calculate": "Calculate revenue",
+                  "outputTitle": "Revenue output",
+                  "save": "Save",
+                  "monthlyRevenue": "Monthly revenue",
+                  "annualRevenue": "Annual revenue",
+                  "effectiveRpm": "Effective RPM/CPM",
+                  "activityMetric": "Clicks / base units",
+                  "projectionTitle": "12-month revenue projection",
+                  "projectionText": "Based on monthly growth",
+                  "tableTitle": "Projection table",
+                  "tableText": "Month-by-month estimate for traffic and monetization targets.",
+                  "month": "Month",
+                  "volume": "Volume",
+                  "revenue": "Revenue",
+                  "supportTitle": "Support free tools",
+                  "supportText": "If this saved you time, support privacy-first browser tools with a coffee-style donation.",
+                  "platformsTitle": "Supported monetization platforms",
+                  "seoTitle": "Multilingual search intent coverage",
+                  "seoIntro": "This tool supports short-tail and long-tail search intents across creator monetization, YouTube income, TikTok earnings, AdSense RPM and sponsorship calculators.",
+                  "shortTail": "Short-tail keywords",
+                  "longTail": "Long-tail keywords",
+                  "savedTitle": "Saved scenarios",
+                  "savedText": "Saved locally in this browser only. No backend or database is used.",
+                  "clearAll": "Clear all",
+                  "guideTitle": "Important note about revenue estimates",
+                  "guideP1": "Use the presets as a starting point only. Real earnings depend on niche, country mix, audience quality, ad inventory, viewability, seasonality, platform rules and sponsorship demand.",
+                  "guideP2": "This single-file app is designed for planning and comparison. It does not guarantee any payout and it does not send your inputs to a server."
+            },
+            "short": [
+                  "ad revenue calculator",
+                  "YouTube money calculator",
+                  "TikTok earnings calculator",
+                  "RPM calculator",
+                  "creator revenue calculator"
+            ],
+            "long": [
+                  "how much money do YouTubers make",
+                  "estimate TikTok creator earnings by country",
+                  "AdSense RPM calculator for websites",
+                  "creator sponsorship CPM calculator"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Website / AdSense",
+                        "text": "Display ads, AdSense-style CPC/RPM and pageview revenue planning."
+                  },
+                  "youtube": {
+                        "label": "YouTube Long-form",
+                        "text": "Estimate long-form video revenue from views, playback RPM and sponsors."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Estimate Shorts income using lower short-form RPM assumptions."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Estimate creator rewards and brand deal income from views."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Estimate Reels, bonus and sponsorship-driven creator income."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Newsletter",
+                        "text": "Estimate sponsor CPM revenue from downloads, impressions or subscribers."
+                  }
+            }
+      },
+      "TR": {
+            "name": "Türkçe (TR)",
+            "locale": "tr-TR",
+            "country": "TR",
+            "t": {
+                  "navCalculator": "Hesaplayıcı",
+                  "navPlatforms": "Platformlar",
+                  "navSeo": "Arama terimleri",
+                  "navSaved": "Kaydedilenler",
+                  "language": "Dil",
+                  "country": "Ülke",
+                  "badge": "100% tarayıcı tabanlı · üyelik yok · veritabanı yok",
+                  "heroTitle": "Ücretsiz Creator Gelir Hesaplayıcı",
+                  "heroText": "Web sitesi reklam geliri, YouTube kazancı, TikTok creator geliri, Instagram/Reels sponsorlukları ve podcast/newsletter CPM gelirini ülkeye göre tahmin edin. Tüm işlem tarayıcınızda yapılır.",
+                  "start": "Hesaplamaya başla",
+                  "example": "Örnek yükle",
+                  "card1Title": "Çok platformlu",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast ve newsletter.",
+                  "card2Title": "Ülke presetleri",
+                  "card2Text": "Pazara göre başlangıç RPM/CPM varsayımları.",
+                  "card3Title": "SEO kapsamı",
+                  "card3Text": "Yerleşik çok dilli arama terimi kümeleri.",
+                  "inputsTitle": "Hesaplama girdileri",
+                  "inputsText": "Platformu seçin ve varsayımları düzenleyin.",
+                  "reset": "Sıfırla",
+                  "scenario": "Senaryo adı",
+                  "platform": "Platform",
+                  "pageviews": "Aylık sayfa görüntüleme",
+                  "adsPerPage": "Sayfa başına reklam",
+                  "fillRate": "Doluluk oranı (%)",
+                  "views": "Aylık izlenme / gösterim",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Aylık sponsor geliri",
+                  "slots": "Sponsor slotları",
+                  "growth": "Aylık büyüme (%)",
+                  "rpmOverride": "Manuel RPM değeri",
+                  "calculate": "Geliri hesapla",
+                  "outputTitle": "Gelir çıktısı",
+                  "save": "Kaydet",
+                  "monthlyRevenue": "Aylık gelir",
+                  "annualRevenue": "Yıllık gelir",
+                  "effectiveRpm": "Efektif RPM/CPM",
+                  "activityMetric": "Tıklama / baz birim",
+                  "projectionTitle": "12 aylık gelir projeksiyonu",
+                  "projectionText": "Aylık büyümeye göre",
+                  "tableTitle": "Projeksiyon tablosu",
+                  "tableText": "Trafik ve monetizasyon hedefleri için aylık tahmin.",
+                  "month": "Ay",
+                  "volume": "Hacim",
+                  "revenue": "Gelir",
+                  "supportTitle": "Ücretsiz araçları destekleyin",
+                  "supportText": "Bu araç zaman kazandırdıysa gizlilik odaklı tarayıcı araçlarını kahve bağışıyla destekleyebilirsiniz.",
+                  "platformsTitle": "Desteklenen para kazanma platformları",
+                  "seoTitle": "Çok dilli arama niyeti kapsamı",
+                  "seoIntro": "Bu araç creator monetization, YouTube geliri, TikTok kazancı, AdSense RPM ve sponsorluk hesaplayıcı aramalarını destekler.",
+                  "shortTail": "Kısa kuyruk anahtar kelimeler",
+                  "longTail": "Uzun kuyruk anahtar kelimeler",
+                  "savedTitle": "Kaydedilen senaryolar",
+                  "savedText": "Yalnızca bu tarayıcıda yerel olarak kaydedilir. Backend veya veritabanı kullanılmaz.",
+                  "clearAll": "Tümünü temizle",
+                  "guideTitle": "Gelir tahminleri hakkında önemli not",
+                  "guideP1": "Presetleri yalnızca başlangıç noktası olarak kullanın. Gerçek kazanç niş, ülke karması, kitle kalitesi, reklam envanteri, görünürlük, sezonluk etki, platform kuralları ve sponsorluk talebine göre değişir.",
+                  "guideP2": "Bu tek dosyalık uygulama planlama ve karşılaştırma amaçlıdır. Herhangi bir ödeme garantisi vermez ve girdilerinizi sunucuya göndermez."
+            },
+            "short": [
+                  "reklam geliri hesaplama",
+                  "YouTube gelir hesaplama",
+                  "TikTok para hesaplama",
+                  "RPM hesaplama",
+                  "creator gelir hesaplama"
+            ],
+            "long": [
+                  "YouTube 1000 izlenme kaç para kazandırır",
+                  "TikTok ülkeye göre gelir hesaplama",
+                  "web sitesi AdSense geliri hesaplama",
+                  "sponsorlu içerik gelir hesaplama"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Web sitesi / AdSense",
+                        "text": "Display reklam, CPC, RPM ve sayfa görüntüleme gelir planlaması."
+                  },
+                  "youtube": {
+                        "label": "YouTube uzun video",
+                        "text": "İzlenme, playback RPM ve sponsorlarla uzun video gelirini tahmin edin."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Daha düşük kısa video RPM varsayımlarıyla Shorts gelirini hesaplayın."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "İzlenmeye göre creator rewards ve marka anlaşması gelirini tahmin edin."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Reels, bonus ve sponsorluk odaklı creator gelirini tahmin edin."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Newsletter",
+                        "text": "İndirme, gösterim veya abone üzerinden sponsor CPM gelirini hesaplayın."
+                  }
+            }
+      },
+      "DE": {
+            "name": "Deutsch (DE)",
+            "locale": "de-DE",
+            "country": "DE",
+            "t": {
+                  "navCalculator": "Rechner",
+                  "navPlatforms": "Plattformen",
+                  "navSeo": "Suchbegriffe",
+                  "navSaved": "Gespeichert",
+                  "language": "Sprache",
+                  "country": "Land",
+                  "badge": "100% clientseitig · keine Anmeldung · keine Datenbank",
+                  "heroTitle": "Kostenloser Creator Einnahmen Rechner",
+                  "heroText": "Schätzen Sie Website-Werbeeinnahmen, YouTube-Einnahmen, TikTok-Creator-Einnahmen, Instagram/Reels-Sponsorings und Podcast/Newsletter-CPM nach Land. Alles läuft lokal im Browser.",
+                  "start": "Berechnung starten",
+                  "example": "Beispiel laden",
+                  "card1Title": "Mehrere Plattformen",
+                  "card1Text": "Web, YouTube, TikTok, Reels, Podcast und Newsletter.",
+                  "card2Title": "Länder-Presets",
+                  "card2Text": "Startwerte für RPM/CPM je Markt.",
+                  "card3Title": "SEO-Abdeckung",
+                  "card3Text": "Integrierte mehrsprachige Suchbegriffe.",
+                  "inputsTitle": "Eingaben",
+                  "inputsText": "Wählen Sie eine Plattform und passen Sie Annahmen an.",
+                  "reset": "Zurücksetzen",
+                  "scenario": "Szenarioname",
+                  "platform": "Plattform",
+                  "pageviews": "Monatliche Seitenaufrufe",
+                  "adsPerPage": "Anzeigen pro Seite",
+                  "fillRate": "Auslastung (%)",
+                  "views": "Monatliche Aufrufe / Impressionen",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Monatliche Sponsoreneinnahmen",
+                  "slots": "Sponsoren-Slots",
+                  "growth": "Monatliches Wachstum (%)",
+                  "rpmOverride": "Manueller RPM-Wert",
+                  "calculate": "Einnahmen berechnen",
+                  "outputTitle": "Ergebnis",
+                  "save": "Speichern",
+                  "monthlyRevenue": "Monatliche Einnahmen",
+                  "annualRevenue": "Jährliche Einnahmen",
+                  "effectiveRpm": "Effektiver RPM/CPM",
+                  "activityMetric": "Klicks / Basiseinheiten",
+                  "projectionTitle": "12-Monats-Prognose",
+                  "projectionText": "Basierend auf monatlichem Wachstum",
+                  "tableTitle": "Projektionstabelle",
+                  "tableText": "Monatliche Schätzung für Traffic- und Monetarisierungsziele.",
+                  "month": "Monat",
+                  "volume": "Volumen",
+                  "revenue": "Einnahmen",
+                  "supportTitle": "Kostenlose Tools unterstützen",
+                  "supportText": "Wenn Ihnen dieses Tool Zeit spart, unterstützen Sie datenschutzfreundliche Browser-Tools mit einer Kaffee-Spende.",
+                  "platformsTitle": "Unterstützte Monetarisierungsplattformen",
+                  "seoTitle": "Mehrsprachige Suchintentionen",
+                  "seoIntro": "Dieses Tool unterstützt Suchintentionen zu Creator-Monetarisierung, YouTube-Einnahmen, TikTok-Einnahmen, AdSense-RPM und Sponsoring-Rechnern.",
+                  "shortTail": "Short-Tail Keywords",
+                  "longTail": "Long-Tail Keywords",
+                  "savedTitle": "Gespeicherte Szenarien",
+                  "savedText": "Nur lokal in diesem Browser gespeichert. Kein Backend und keine Datenbank.",
+                  "clearAll": "Alles löschen",
+                  "guideTitle": "Wichtiger Hinweis zu Einnahmenschätzungen",
+                  "guideP1": "Nutzen Sie Presets nur als Startpunkt. Reale Einnahmen hängen von Nische, Ländermix, Zielgruppenqualität, Anzeigeninventar, Sichtbarkeit, Saisonalität, Plattformregeln und Sponsorennachfrage ab.",
+                  "guideP2": "Diese Single-File-App dient der Planung und dem Vergleich. Sie garantiert keine Auszahlung und sendet keine Eingaben an einen Server."
+            },
+            "short": [
+                  "Werbeeinnahmen Rechner",
+                  "YouTube Einnahmen Rechner",
+                  "TikTok Einnahmen Rechner",
+                  "RPM Rechner",
+                  "Creator Einnahmen Rechner"
+            ],
+            "long": [
+                  "YouTube Einnahmen pro 1000 Aufrufe berechnen",
+                  "TikTok Creator Einnahmen nach Land",
+                  "AdSense RPM Rechner Website",
+                  "Sponsoring CPM berechnen"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Website / AdSense",
+                        "text": "Display-Anzeigen, CPC/RPM und Seitenaufruf-Umsatzplanung."
+                  },
+                  "youtube": {
+                        "label": "YouTube Langformat",
+                        "text": "Schätzen Sie Videoeinnahmen aus Aufrufen, RPM und Sponsoren."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Schätzen Sie Shorts-Einnahmen mit niedrigeren Short-Form-RPMs."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Schätzen Sie Creator Rewards und Markendeals aus Aufrufen."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Schätzen Sie Reels-, Bonus- und Sponsoring-Einnahmen."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Newsletter",
+                        "text": "Schätzen Sie Sponsor-CPM aus Downloads, Impressionen oder Abonnenten."
+                  }
+            }
+      },
+      "FR": {
+            "name": "Français (FR)",
+            "locale": "fr-FR",
+            "country": "FR",
+            "t": {
+                  "navCalculator": "Calculateur",
+                  "navPlatforms": "Plateformes",
+                  "navSeo": "Termes de recherche",
+                  "navSaved": "Enregistrés",
+                  "language": "Langue",
+                  "country": "Pays",
+                  "badge": "100% côté client · sans inscription · sans base de données",
+                  "heroTitle": "Calculateur gratuit de revenus créateur",
+                  "heroText": "Estimez les revenus publicitaires de site, YouTube, TikTok, Instagram/Reels et podcast/newsletter par pays. Tout fonctionne localement dans votre navigateur.",
+                  "start": "Commencer",
+                  "example": "Charger un exemple",
+                  "card1Title": "Multi-plateforme",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast et newsletter.",
+                  "card2Title": "Préréglages par pays",
+                  "card2Text": "Hypothèses RPM/CPM de départ par marché.",
+                  "card3Title": "Couverture SEO",
+                  "card3Text": "Groupes intégrés de termes de recherche multilingues.",
+                  "inputsTitle": "Entrées du calculateur",
+                  "inputsText": "Choisissez une plateforme et ajustez les hypothèses.",
+                  "reset": "Réinitialiser",
+                  "scenario": "Nom du scénario",
+                  "platform": "Plateforme",
+                  "pageviews": "Pages vues mensuelles",
+                  "adsPerPage": "Annonces par page",
+                  "fillRate": "Taux de remplissage (%)",
+                  "views": "Vues / impressions mensuelles",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Revenu sponsor mensuel",
+                  "slots": "Emplacements sponsors",
+                  "growth": "Croissance mensuelle (%)",
+                  "rpmOverride": "RPM manuel",
+                  "calculate": "Calculer les revenus",
+                  "outputTitle": "Résultat des revenus",
+                  "save": "Enregistrer",
+                  "monthlyRevenue": "Revenu mensuel",
+                  "annualRevenue": "Revenu annuel",
+                  "effectiveRpm": "RPM/CPM effectif",
+                  "activityMetric": "Clics / unités de base",
+                  "projectionTitle": "Projection de revenus sur 12 mois",
+                  "projectionText": "Basée sur la croissance mensuelle",
+                  "tableTitle": "Tableau de projection",
+                  "tableText": "Estimation mois par mois du trafic et de la monétisation.",
+                  "month": "Mois",
+                  "volume": "Volume",
+                  "revenue": "Revenu",
+                  "supportTitle": "Soutenir les outils gratuits",
+                  "supportText": "Si cet outil vous a fait gagner du temps, soutenez les outils privés côté navigateur avec un don type café.",
+                  "platformsTitle": "Plateformes de monétisation prises en charge",
+                  "seoTitle": "Couverture multilingue des intentions de recherche",
+                  "seoIntro": "Cet outil couvre les intentions liées à la monétisation créateur, aux revenus YouTube, TikTok, AdSense RPM et sponsoring.",
+                  "shortTail": "Mots-clés courts",
+                  "longTail": "Mots-clés longue traîne",
+                  "savedTitle": "Scénarios enregistrés",
+                  "savedText": "Enregistrés uniquement dans ce navigateur. Aucun backend ni base de données.",
+                  "clearAll": "Tout effacer",
+                  "guideTitle": "Note importante sur les estimations de revenus",
+                  "guideP1": "Utilisez les préréglages comme point de départ. Les revenus réels dépendent de la niche, du mix pays, de la qualité de l’audience, de l’inventaire publicitaire, de la visibilité, de la saisonnalité, des règles de plateforme et de la demande sponsor.",
+                  "guideP2": "Cette application en fichier unique sert à planifier et comparer. Elle ne garantit aucun paiement et n’envoie pas vos données à un serveur."
+            },
+            "short": [
+                  "calculateur revenus publicitaires",
+                  "calculateur revenus YouTube",
+                  "calculateur revenus TikTok",
+                  "calculateur RPM",
+                  "revenus créateur"
+            ],
+            "long": [
+                  "combien gagne un youtubeur pour 1000 vues",
+                  "estimer revenus TikTok par pays",
+                  "calculateur RPM AdSense site web",
+                  "calculateur CPM sponsoring"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Site web / AdSense",
+                        "text": "Planification des revenus display, CPC/RPM et pages vues."
+                  },
+                  "youtube": {
+                        "label": "YouTube long format",
+                        "text": "Estimez les revenus des vidéos longues selon vues, RPM et sponsors."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Estimez les revenus Shorts avec des RPM de vidéo courte plus faibles."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Estimez les revenus créateur et partenariats de marque selon les vues."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Estimez les revenus Reels, bonus et sponsorings."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Newsletter",
+                        "text": "Estimez les revenus sponsor CPM selon téléchargements, impressions ou abonnés."
+                  }
+            }
+      },
+      "ES": {
+            "name": "Español (ES)",
+            "locale": "es-ES",
+            "country": "ES",
+            "t": {
+                  "navCalculator": "Calculadora",
+                  "navPlatforms": "Plataformas",
+                  "navSeo": "Términos de búsqueda",
+                  "navSaved": "Guardados",
+                  "language": "Idioma",
+                  "country": "País",
+                  "badge": "100% en el navegador · sin registro · sin base de datos",
+                  "heroTitle": "Calculadora gratuita de ingresos para creadores",
+                  "heroText": "Calcula ingresos de anuncios web, YouTube, TikTok, Instagram/Reels y podcast/newsletter por país. Todo funciona localmente en tu navegador.",
+                  "start": "Empezar",
+                  "example": "Cargar ejemplo",
+                  "card1Title": "Multiplataforma",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast y newsletter.",
+                  "card2Title": "Presets por país",
+                  "card2Text": "Supuestos iniciales de RPM/CPM por mercado.",
+                  "card3Title": "Cobertura SEO",
+                  "card3Text": "Clústeres integrados de términos de búsqueda multilingües.",
+                  "inputsTitle": "Datos de la calculadora",
+                  "inputsText": "Elige una plataforma y ajusta los supuestos.",
+                  "reset": "Restablecer",
+                  "scenario": "Nombre del escenario",
+                  "platform": "Plataforma",
+                  "pageviews": "Páginas vistas mensuales",
+                  "adsPerPage": "Anuncios por página",
+                  "fillRate": "Tasa de llenado (%)",
+                  "views": "Vistas / impresiones mensuales",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Ingreso mensual de patrocinio",
+                  "slots": "Espacios de patrocinio",
+                  "growth": "Crecimiento mensual (%)",
+                  "rpmOverride": "RPM manual",
+                  "calculate": "Calcular ingresos",
+                  "outputTitle": "Resultado de ingresos",
+                  "save": "Guardar",
+                  "monthlyRevenue": "Ingresos mensuales",
+                  "annualRevenue": "Ingresos anuales",
+                  "effectiveRpm": "RPM/CPM efectivo",
+                  "activityMetric": "Clics / unidades base",
+                  "projectionTitle": "Proyección de ingresos a 12 meses",
+                  "projectionText": "Basada en el crecimiento mensual",
+                  "tableTitle": "Tabla de proyección",
+                  "tableText": "Estimación mensual de tráfico y monetización.",
+                  "month": "Mes",
+                  "volume": "Volumen",
+                  "revenue": "Ingresos",
+                  "supportTitle": "Apoya las herramientas gratuitas",
+                  "supportText": "Si te ahorró tiempo, apoya herramientas privadas en el navegador con una donación tipo café.",
+                  "platformsTitle": "Plataformas de monetización compatibles",
+                  "seoTitle": "Cobertura multilingüe de intención de búsqueda",
+                  "seoIntro": "Esta herramienta cubre monetización de creadores, ingresos de YouTube, TikTok, AdSense RPM y patrocinios.",
+                  "shortTail": "Keywords cortas",
+                  "longTail": "Keywords long-tail",
+                  "savedTitle": "Escenarios guardados",
+                  "savedText": "Guardado solo en este navegador. Sin backend ni base de datos.",
+                  "clearAll": "Borrar todo",
+                  "guideTitle": "Nota importante sobre estimaciones de ingresos",
+                  "guideP1": "Usa los presets solo como punto de partida. Los ingresos reales dependen del nicho, mezcla de países, calidad de audiencia, inventario, visibilidad, estacionalidad, reglas de plataforma y demanda de patrocinio.",
+                  "guideP2": "Esta app de archivo único sirve para planificar y comparar. No garantiza pagos ni envía tus datos a un servidor."
+            },
+            "short": [
+                  "calculadora ingresos anuncios",
+                  "calculadora ingresos YouTube",
+                  "calculadora ingresos TikTok",
+                  "calculadora RPM",
+                  "ingresos creadores"
+            ],
+            "long": [
+                  "cuánto paga YouTube por 1000 vistas",
+                  "estimar ingresos TikTok por país",
+                  "calculadora RPM AdSense web",
+                  "calculadora CPM patrocinio"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Sitio web / AdSense",
+                        "text": "Planifica ingresos display, CPC/RPM y páginas vistas."
+                  },
+                  "youtube": {
+                        "label": "YouTube formato largo",
+                        "text": "Estima ingresos de videos largos por vistas, RPM y sponsors."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Estima ingresos de Shorts con supuestos de RPM más bajos."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Estima recompensas de creadores y acuerdos de marca por vistas."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Estima ingresos de Reels, bonus y patrocinios."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Newsletter",
+                        "text": "Estima ingresos CPM de sponsors por descargas, impresiones o suscriptores."
+                  }
+            }
+      },
+      "IT": {
+            "name": "Italiano (IT)",
+            "locale": "it-IT",
+            "country": "IT",
+            "t": {
+                  "navCalculator": "Calcolatore",
+                  "navPlatforms": "Piattaforme",
+                  "navSeo": "Termini di ricerca",
+                  "navSaved": "Salvati",
+                  "language": "Lingua",
+                  "country": "Paese",
+                  "badge": "100% lato client · senza registrazione · senza database",
+                  "heroTitle": "Calcolatore gratuito ricavi creator",
+                  "heroText": "Stima ricavi da annunci web, YouTube, TikTok, Instagram/Reels e podcast/newsletter per paese. Tutto funziona localmente nel browser.",
+                  "start": "Inizia",
+                  "example": "Carica esempio",
+                  "card1Title": "Multi-piattaforma",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast e newsletter.",
+                  "card2Title": "Preset per paese",
+                  "card2Text": "Ipotesi RPM/CPM iniziali per mercato.",
+                  "card3Title": "Copertura SEO",
+                  "card3Text": "Cluster integrati di termini di ricerca multilingue.",
+                  "inputsTitle": "Input del calcolatore",
+                  "inputsText": "Scegli una piattaforma e modifica le ipotesi.",
+                  "reset": "Reimposta",
+                  "scenario": "Nome scenario",
+                  "platform": "Piattaforma",
+                  "pageviews": "Pageview mensili",
+                  "adsPerPage": "Annunci per pagina",
+                  "fillRate": "Fill rate (%)",
+                  "views": "Visualizzazioni / impression mensili",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Ricavi sponsor mensili",
+                  "slots": "Slot sponsor",
+                  "growth": "Crescita mensile (%)",
+                  "rpmOverride": "RPM manuale",
+                  "calculate": "Calcola ricavi",
+                  "outputTitle": "Risultato ricavi",
+                  "save": "Salva",
+                  "monthlyRevenue": "Ricavi mensili",
+                  "annualRevenue": "Ricavi annuali",
+                  "effectiveRpm": "RPM/CPM effettivo",
+                  "activityMetric": "Click / unità base",
+                  "projectionTitle": "Proiezione ricavi a 12 mesi",
+                  "projectionText": "Basata sulla crescita mensile",
+                  "tableTitle": "Tabella di proiezione",
+                  "tableText": "Stima mensile di traffico e monetizzazione.",
+                  "month": "Mese",
+                  "volume": "Volume",
+                  "revenue": "Ricavi",
+                  "supportTitle": "Supporta gli strumenti gratuiti",
+                  "supportText": "Se ti ha fatto risparmiare tempo, supporta strumenti privacy-first con una donazione tipo caffè.",
+                  "platformsTitle": "Piattaforme di monetizzazione supportate",
+                  "seoTitle": "Copertura multilingue degli intenti di ricerca",
+                  "seoIntro": "Lo strumento copre monetizzazione creator, ricavi YouTube, TikTok, AdSense RPM e sponsorizzazioni.",
+                  "shortTail": "Keyword brevi",
+                  "longTail": "Keyword long-tail",
+                  "savedTitle": "Scenari salvati",
+                  "savedText": "Salvati solo in questo browser. Nessun backend o database.",
+                  "clearAll": "Cancella tutto",
+                  "guideTitle": "Nota importante sulle stime di ricavo",
+                  "guideP1": "Usa i preset solo come punto di partenza. I ricavi reali dipendono da nicchia, mix paesi, qualità audience, inventario, viewability, stagionalità, regole piattaforma e domanda sponsor.",
+                  "guideP2": "Questa app single-file serve per pianificazione e confronto. Non garantisce pagamenti e non invia input a server."
+            },
+            "short": [
+                  "calcolatore ricavi pubblicitari",
+                  "calcolatore guadagni YouTube",
+                  "calcolatore guadagni TikTok",
+                  "calcolatore RPM",
+                  "ricavi creator"
+            ],
+            "long": [
+                  "quanto paga YouTube per 1000 visualizzazioni",
+                  "stimare guadagni TikTok per paese",
+                  "calcolatore RPM AdSense sito",
+                  "calcolatore CPM sponsorizzazioni"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Sito web / AdSense",
+                        "text": "Pianifica ricavi display, CPC/RPM e pageview."
+                  },
+                  "youtube": {
+                        "label": "YouTube long-form",
+                        "text": "Stima ricavi video lunghi da visualizzazioni, RPM e sponsor."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Stima ricavi Shorts con RPM short-form più bassi."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Stima rewards creator e deal di brand dalle visualizzazioni."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Stima ricavi Reels, bonus e sponsorizzazioni."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Newsletter",
+                        "text": "Stima ricavi sponsor CPM da download, impression o iscritti."
+                  }
+            }
+      },
+      "NL": {
+            "name": "Nederlands (NL)",
+            "locale": "nl-NL",
+            "country": "NL",
+            "t": {
+                  "navCalculator": "Calculator",
+                  "navPlatforms": "Platformen",
+                  "navSeo": "Zoektermen",
+                  "navSaved": "Opgeslagen",
+                  "language": "Taal",
+                  "country": "Land",
+                  "badge": "100% local · no signup · no database",
+                  "heroTitle": "Gratis creator inkomsten calculator",
+                  "heroText": "Schat websiteadvertenties, YouTube-, TikTok-, Instagram/Reels- en podcast/nieuwsbriefinkomsten per land. Alles draait lokaal in je browser.",
+                  "start": "Begin",
+                  "example": "Voorbeeld laden",
+                  "card1Title": "Multi-platform",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast and newsletter.",
+                  "card2Title": "Country presets",
+                  "card2Text": "Starter RPM/CPM assumptions by market.",
+                  "card3Title": "SEO coverage",
+                  "card3Text": "Built-in multilingual search term clusters.",
+                  "inputsTitle": "Invoer",
+                  "inputsText": "Choose a platform and adjust assumptions.",
+                  "reset": "Reset",
+                  "scenario": "Scenario name",
+                  "platform": "Platform",
+                  "pageviews": "Monthly pageviews",
+                  "adsPerPage": "Ads per page",
+                  "fillRate": "Fill rate (%)",
+                  "views": "Monthly views / impressions",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Monthly sponsor income",
+                  "slots": "Sponsor slots",
+                  "growth": "Monthly growth (%)",
+                  "rpmOverride": "Manual RPM override",
+                  "calculate": "Inkomsten berekenen",
+                  "outputTitle": "Resultaat",
+                  "save": "Save",
+                  "monthlyRevenue": "Maandelijkse inkomsten",
+                  "annualRevenue": "Jaarlijkse inkomsten",
+                  "effectiveRpm": "Effective RPM/CPM",
+                  "activityMetric": "Clicks / base units",
+                  "projectionTitle": "12-month revenue projection",
+                  "projectionText": "Based on monthly growth",
+                  "tableTitle": "Projection table",
+                  "tableText": "Month-by-month estimate for traffic and monetization targets.",
+                  "month": "Month",
+                  "volume": "Volume",
+                  "revenue": "Revenue",
+                  "supportTitle": "Support free tools",
+                  "supportText": "If this saved you time, support privacy-first browser tools with a coffee-style donation.",
+                  "platformsTitle": "Supported monetization platforms",
+                  "seoTitle": "Meertalige zoekdekking",
+                  "seoIntro": "This tool supports short-tail and long-tail search intents across creator monetization, YouTube income, TikTok earnings, AdSense RPM and sponsorship calculators.",
+                  "shortTail": "Short-tail zoekwoorden",
+                  "longTail": "Long-tail zoekwoorden",
+                  "savedTitle": "Saved scenarios",
+                  "savedText": "Saved locally in this browser only. No backend or database is used.",
+                  "clearAll": "Clear all",
+                  "guideTitle": "Important note about revenue estimates",
+                  "guideP1": "Use the presets as a starting point only. Real earnings depend on niche, country mix, audience quality, ad inventory, viewability, seasonality, platform rules and sponsorship demand.",
+                  "guideP2": "This single-file app is designed for planning and comparison. It does not guarantee any payout and it does not send your inputs to a server."
+            },
+            "short": [
+                  "advertentie inkomsten calculator",
+                  "YouTube inkomsten calculator",
+                  "TikTok inkomsten calculator",
+                  "RPM calculator",
+                  "creator inkomsten"
+            ],
+            "long": [
+                  "hoeveel verdient YouTube per 1000 views",
+                  "TikTok inkomsten per land schatten",
+                  "AdSense RPM calculator website",
+                  "sponsoring CPM calculator"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Website / AdSense",
+                        "text": "Plan displayadvertenties, CPC/RPM en pageview-inkomsten."
+                  },
+                  "youtube": {
+                        "label": "YouTube long-form",
+                        "text": "Schat inkomsten van lange video’s op basis van views, RPM en sponsors."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Schat Shorts-inkomsten met lagere short-form RPM’s."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Schat creator rewards en merkdeals op basis van views."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Schat Reels-, bonus- en sponsorinkomsten."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Newsletter",
+                        "text": "Schat sponsor-CPM op basis van downloads, impressies of abonnees."
+                  }
+            }
+      },
+      "SV": {
+            "name": "Svenska (SV)",
+            "locale": "sv-SE",
+            "country": "SE",
+            "t": {
+                  "navCalculator": "Kalkylator",
+                  "navPlatforms": "Plattformar",
+                  "navSeo": "Söktermer",
+                  "navSaved": "Sparade",
+                  "language": "Språk",
+                  "country": "Land",
+                  "badge": "100% local · no signup · no database",
+                  "heroTitle": "Gratis intäktskalkylator för creators",
+                  "heroText": "Beräkna webbannonser, YouTube-, TikTok-, Instagram/Reels- och podcast/nyhetsbrevsintäkter per land. Allt körs lokalt i webbläsaren.",
+                  "start": "Starta",
+                  "example": "Ladda exempel",
+                  "card1Title": "Multi-platform",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast and newsletter.",
+                  "card2Title": "Country presets",
+                  "card2Text": "Starter RPM/CPM assumptions by market.",
+                  "card3Title": "SEO coverage",
+                  "card3Text": "Built-in multilingual search term clusters.",
+                  "inputsTitle": "Indata",
+                  "inputsText": "Choose a platform and adjust assumptions.",
+                  "reset": "Reset",
+                  "scenario": "Scenario name",
+                  "platform": "Platform",
+                  "pageviews": "Monthly pageviews",
+                  "adsPerPage": "Ads per page",
+                  "fillRate": "Fill rate (%)",
+                  "views": "Monthly views / impressions",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Monthly sponsor income",
+                  "slots": "Sponsor slots",
+                  "growth": "Monthly growth (%)",
+                  "rpmOverride": "Manual RPM override",
+                  "calculate": "Beräkna intäkter",
+                  "outputTitle": "Resultat",
+                  "save": "Save",
+                  "monthlyRevenue": "Månadsintäkt",
+                  "annualRevenue": "Årsintäkt",
+                  "effectiveRpm": "Effective RPM/CPM",
+                  "activityMetric": "Clicks / base units",
+                  "projectionTitle": "12-month revenue projection",
+                  "projectionText": "Based on monthly growth",
+                  "tableTitle": "Projection table",
+                  "tableText": "Month-by-month estimate for traffic and monetization targets.",
+                  "month": "Month",
+                  "volume": "Volume",
+                  "revenue": "Revenue",
+                  "supportTitle": "Support free tools",
+                  "supportText": "If this saved you time, support privacy-first browser tools with a coffee-style donation.",
+                  "platformsTitle": "Supported monetization platforms",
+                  "seoTitle": "Flerspråkiga söktermer",
+                  "seoIntro": "This tool supports short-tail and long-tail search intents across creator monetization, YouTube income, TikTok earnings, AdSense RPM and sponsorship calculators.",
+                  "shortTail": "Short-tail sökord",
+                  "longTail": "Long-tail sökord",
+                  "savedTitle": "Saved scenarios",
+                  "savedText": "Saved locally in this browser only. No backend or database is used.",
+                  "clearAll": "Clear all",
+                  "guideTitle": "Important note about revenue estimates",
+                  "guideP1": "Use the presets as a starting point only. Real earnings depend on niche, country mix, audience quality, ad inventory, viewability, seasonality, platform rules and sponsorship demand.",
+                  "guideP2": "This single-file app is designed for planning and comparison. It does not guarantee any payout and it does not send your inputs to a server."
+            },
+            "short": [
+                  "annonsintäkter kalkylator",
+                  "YouTube intäkter kalkylator",
+                  "TikTok intäkter kalkylator",
+                  "RPM kalkylator",
+                  "creator intäkter"
+            ],
+            "long": [
+                  "hur mycket betalar YouTube per 1000 visningar",
+                  "beräkna TikTok intäkter per land",
+                  "AdSense RPM kalkylator webbplats",
+                  "sponsring CPM kalkylator"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Webbplats / AdSense",
+                        "text": "Planera displayannonser, CPC/RPM och sidvisningsintäkter."
+                  },
+                  "youtube": {
+                        "label": "YouTube långformat",
+                        "text": "Beräkna intäkter från långa videor med visningar, RPM och sponsorer."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Beräkna Shorts-intäkter med lägre short-form RPM."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Beräkna creator rewards och varumärkesdeals från visningar."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Beräkna Reels-, bonus- och sponsorintäkter."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Nyhetsbrev",
+                        "text": "Beräkna sponsor-CPM från nedladdningar, impressions eller prenumeranter."
+                  }
+            }
+      },
+      "DA": {
+            "name": "Dansk (DA)",
+            "locale": "da-DK",
+            "country": "DK",
+            "t": {
+                  "navCalculator": "Beregner",
+                  "navPlatforms": "Platforme",
+                  "navSeo": "Søgetermer",
+                  "navSaved": "Gemte",
+                  "language": "Sprog",
+                  "country": "Land",
+                  "badge": "100% local · no signup · no database",
+                  "heroTitle": "Gratis indtjeningsberegner for creators",
+                  "heroText": "Beregn webannoncer, YouTube-, TikTok-, Instagram/Reels- og podcast/nyhedsbrevsindtægter efter land. Alt kører lokalt i browseren.",
+                  "start": "Start",
+                  "example": "Indlæs eksempel",
+                  "card1Title": "Multi-platform",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast and newsletter.",
+                  "card2Title": "Country presets",
+                  "card2Text": "Starter RPM/CPM assumptions by market.",
+                  "card3Title": "SEO coverage",
+                  "card3Text": "Built-in multilingual search term clusters.",
+                  "inputsTitle": "Input",
+                  "inputsText": "Choose a platform and adjust assumptions.",
+                  "reset": "Reset",
+                  "scenario": "Scenario name",
+                  "platform": "Platform",
+                  "pageviews": "Monthly pageviews",
+                  "adsPerPage": "Ads per page",
+                  "fillRate": "Fill rate (%)",
+                  "views": "Monthly views / impressions",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Monthly sponsor income",
+                  "slots": "Sponsor slots",
+                  "growth": "Monthly growth (%)",
+                  "rpmOverride": "Manual RPM override",
+                  "calculate": "Beregn indtjening",
+                  "outputTitle": "Resultat",
+                  "save": "Save",
+                  "monthlyRevenue": "Månedlig indtjening",
+                  "annualRevenue": "Årlig indtjening",
+                  "effectiveRpm": "Effective RPM/CPM",
+                  "activityMetric": "Clicks / base units",
+                  "projectionTitle": "12-month revenue projection",
+                  "projectionText": "Based on monthly growth",
+                  "tableTitle": "Projection table",
+                  "tableText": "Month-by-month estimate for traffic and monetization targets.",
+                  "month": "Month",
+                  "volume": "Volume",
+                  "revenue": "Revenue",
+                  "supportTitle": "Support free tools",
+                  "supportText": "If this saved you time, support privacy-first browser tools with a coffee-style donation.",
+                  "platformsTitle": "Supported monetization platforms",
+                  "seoTitle": "Flersproget søgedækning",
+                  "seoIntro": "This tool supports short-tail and long-tail search intents across creator monetization, YouTube income, TikTok earnings, AdSense RPM and sponsorship calculators.",
+                  "shortTail": "Short-tail søgeord",
+                  "longTail": "Long-tail søgeord",
+                  "savedTitle": "Saved scenarios",
+                  "savedText": "Saved locally in this browser only. No backend or database is used.",
+                  "clearAll": "Clear all",
+                  "guideTitle": "Important note about revenue estimates",
+                  "guideP1": "Use the presets as a starting point only. Real earnings depend on niche, country mix, audience quality, ad inventory, viewability, seasonality, platform rules and sponsorship demand.",
+                  "guideP2": "This single-file app is designed for planning and comparison. It does not guarantee any payout and it does not send your inputs to a server."
+            },
+            "short": [
+                  "annonceindtægter beregner",
+                  "YouTube indtjening beregner",
+                  "TikTok indtjening beregner",
+                  "RPM beregner",
+                  "creator indtjening"
+            ],
+            "long": [
+                  "hvor meget betaler YouTube per 1000 visninger",
+                  "beregn TikTok indtjening efter land",
+                  "AdSense RPM beregner hjemmeside",
+                  "sponsor CPM beregner"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Website / AdSense",
+                        "text": "Planlæg displayannoncer, CPC/RPM og sidevisningsindtægter."
+                  },
+                  "youtube": {
+                        "label": "YouTube long-form",
+                        "text": "Beregn indtægter fra lange videoer ud fra visninger, RPM og sponsorer."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Beregn Shorts-indtægter med lavere short-form RPM."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Beregn creator rewards og brand deals ud fra visninger."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Beregn Reels-, bonus- og sponsorindtægter."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Nyhedsbrev",
+                        "text": "Beregn sponsor-CPM fra downloads, visninger eller abonnenter."
+                  }
+            }
+      },
+      "NO": {
+            "name": "Norsk (NO)",
+            "locale": "nb-NO",
+            "country": "NO",
+            "t": {
+                  "navCalculator": "Kalkulator",
+                  "navPlatforms": "Plattformer",
+                  "navSeo": "Søkeord",
+                  "navSaved": "Lagret",
+                  "language": "Språk",
+                  "country": "Land",
+                  "badge": "100% local · no signup · no database",
+                  "heroTitle": "Gratis inntektskalkulator for creators",
+                  "heroText": "Beregn nettannonser, YouTube-, TikTok-, Instagram/Reels- og podcast/nyhetsbrevinntekter etter land. Alt kjører lokalt i nettleseren.",
+                  "start": "Start",
+                  "example": "Last eksempel",
+                  "card1Title": "Multi-platform",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast and newsletter.",
+                  "card2Title": "Country presets",
+                  "card2Text": "Starter RPM/CPM assumptions by market.",
+                  "card3Title": "SEO coverage",
+                  "card3Text": "Built-in multilingual search term clusters.",
+                  "inputsTitle": "Inndata",
+                  "inputsText": "Choose a platform and adjust assumptions.",
+                  "reset": "Reset",
+                  "scenario": "Scenario name",
+                  "platform": "Platform",
+                  "pageviews": "Monthly pageviews",
+                  "adsPerPage": "Ads per page",
+                  "fillRate": "Fill rate (%)",
+                  "views": "Monthly views / impressions",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Monthly sponsor income",
+                  "slots": "Sponsor slots",
+                  "growth": "Monthly growth (%)",
+                  "rpmOverride": "Manual RPM override",
+                  "calculate": "Beregn inntekter",
+                  "outputTitle": "Resultat",
+                  "save": "Save",
+                  "monthlyRevenue": "Månedlig inntekt",
+                  "annualRevenue": "Årlig inntekt",
+                  "effectiveRpm": "Effective RPM/CPM",
+                  "activityMetric": "Clicks / base units",
+                  "projectionTitle": "12-month revenue projection",
+                  "projectionText": "Based on monthly growth",
+                  "tableTitle": "Projection table",
+                  "tableText": "Month-by-month estimate for traffic and monetization targets.",
+                  "month": "Month",
+                  "volume": "Volume",
+                  "revenue": "Revenue",
+                  "supportTitle": "Support free tools",
+                  "supportText": "If this saved you time, support privacy-first browser tools with a coffee-style donation.",
+                  "platformsTitle": "Supported monetization platforms",
+                  "seoTitle": "Flerspråklige søkeord",
+                  "seoIntro": "This tool supports short-tail and long-tail search intents across creator monetization, YouTube income, TikTok earnings, AdSense RPM and sponsorship calculators.",
+                  "shortTail": "Short-tail søkeord",
+                  "longTail": "Long-tail søkeord",
+                  "savedTitle": "Saved scenarios",
+                  "savedText": "Saved locally in this browser only. No backend or database is used.",
+                  "clearAll": "Clear all",
+                  "guideTitle": "Important note about revenue estimates",
+                  "guideP1": "Use the presets as a starting point only. Real earnings depend on niche, country mix, audience quality, ad inventory, viewability, seasonality, platform rules and sponsorship demand.",
+                  "guideP2": "This single-file app is designed for planning and comparison. It does not guarantee any payout and it does not send your inputs to a server."
+            },
+            "short": [
+                  "annonseinntekter kalkulator",
+                  "YouTube inntekter kalkulator",
+                  "TikTok inntekter kalkulator",
+                  "RPM kalkulator",
+                  "creator inntekter"
+            ],
+            "long": [
+                  "hvor mye betaler YouTube per 1000 visninger",
+                  "beregn TikTok inntekter etter land",
+                  "AdSense RPM kalkulator nettside",
+                  "sponsor CPM kalkulator"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Nettside / AdSense",
+                        "text": "Planlegg displayannonser, CPC/RPM og sidevisningsinntekter."
+                  },
+                  "youtube": {
+                        "label": "YouTube langformat",
+                        "text": "Beregn inntekter fra lange videoer med visninger, RPM og sponsorer."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Beregn Shorts-inntekter med lavere short-form RPM."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Beregn creator rewards og merkeavtaler fra visninger."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Beregn Reels-, bonus- og sponsorinntekter."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Nyhetsbrev",
+                        "text": "Beregn sponsor-CPM fra nedlastinger, visninger eller abonnenter."
+                  }
+            }
+      },
+      "FI": {
+            "name": "Suomi (FI)",
+            "locale": "fi-FI",
+            "country": "FI",
+            "t": {
+                  "navCalculator": "Laskuri",
+                  "navPlatforms": "Alustat",
+                  "navSeo": "Hakutermit",
+                  "navSaved": "Tallennetut",
+                  "language": "Kieli",
+                  "country": "Maa",
+                  "badge": "100% local · no signup · no database",
+                  "heroTitle": "Ilmainen creator-tulojen laskuri",
+                  "heroText": "Arvioi verkkomainosten, YouTuben, TikTokin, Instagram/Reelsin ja podcast/uutiskirjeiden tulot maittain. Kaikki toimii paikallisesti selaimessa.",
+                  "start": "Aloita",
+                  "example": "Lataa esimerkki",
+                  "card1Title": "Multi-platform",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast and newsletter.",
+                  "card2Title": "Country presets",
+                  "card2Text": "Starter RPM/CPM assumptions by market.",
+                  "card3Title": "SEO coverage",
+                  "card3Text": "Built-in multilingual search term clusters.",
+                  "inputsTitle": "Syötteet",
+                  "inputsText": "Choose a platform and adjust assumptions.",
+                  "reset": "Reset",
+                  "scenario": "Scenario name",
+                  "platform": "Platform",
+                  "pageviews": "Monthly pageviews",
+                  "adsPerPage": "Ads per page",
+                  "fillRate": "Fill rate (%)",
+                  "views": "Monthly views / impressions",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Monthly sponsor income",
+                  "slots": "Sponsor slots",
+                  "growth": "Monthly growth (%)",
+                  "rpmOverride": "Manual RPM override",
+                  "calculate": "Laske tulot",
+                  "outputTitle": "Tulos",
+                  "save": "Save",
+                  "monthlyRevenue": "Kuukausitulot",
+                  "annualRevenue": "Vuositulot",
+                  "effectiveRpm": "Effective RPM/CPM",
+                  "activityMetric": "Clicks / base units",
+                  "projectionTitle": "12-month revenue projection",
+                  "projectionText": "Based on monthly growth",
+                  "tableTitle": "Projection table",
+                  "tableText": "Month-by-month estimate for traffic and monetization targets.",
+                  "month": "Month",
+                  "volume": "Volume",
+                  "revenue": "Revenue",
+                  "supportTitle": "Support free tools",
+                  "supportText": "If this saved you time, support privacy-first browser tools with a coffee-style donation.",
+                  "platformsTitle": "Supported monetization platforms",
+                  "seoTitle": "Monikieliset hakutermit",
+                  "seoIntro": "This tool supports short-tail and long-tail search intents across creator monetization, YouTube income, TikTok earnings, AdSense RPM and sponsorship calculators.",
+                  "shortTail": "Lyhyet hakusanat",
+                  "longTail": "Pitkän hännän hakusanat",
+                  "savedTitle": "Saved scenarios",
+                  "savedText": "Saved locally in this browser only. No backend or database is used.",
+                  "clearAll": "Clear all",
+                  "guideTitle": "Important note about revenue estimates",
+                  "guideP1": "Use the presets as a starting point only. Real earnings depend on niche, country mix, audience quality, ad inventory, viewability, seasonality, platform rules and sponsorship demand.",
+                  "guideP2": "This single-file app is designed for planning and comparison. It does not guarantee any payout and it does not send your inputs to a server."
+            },
+            "short": [
+                  "mainostulo laskuri",
+                  "YouTube tulot laskuri",
+                  "TikTok tulot laskuri",
+                  "RPM laskuri",
+                  "creator tulot"
+            ],
+            "long": [
+                  "paljonko YouTube maksaa 1000 katselusta",
+                  "arvioi TikTok tulot maittain",
+                  "AdSense RPM laskuri verkkosivulle",
+                  "sponsorointi CPM laskuri"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "Verkkosivusto / AdSense",
+                        "text": "Suunnittele display-mainosten, CPC/RPM:n ja sivunäyttöjen tulot."
+                  },
+                  "youtube": {
+                        "label": "YouTube pitkät videot",
+                        "text": "Arvioi pitkien videoiden tulot katseluista, RPM:stä ja sponsoreista."
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "Arvioi Shorts-tulot matalammilla short-form RPM-oletuksilla."
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "Arvioi creator rewards- ja brändidiilien tulot katseluista."
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "Arvioi Reels-, bonus- ja sponsoritulot."
+                  },
+                  "podcast": {
+                        "label": "Podcast / Uutiskirje",
+                        "text": "Arvioi sponsorien CPM-tulot latauksista, näytöistä tai tilaajista."
+                  }
+            }
+      },
+      "ZH": {
+            "name": "中文 (ZH)",
+            "locale": "zh-CN",
+            "country": "CN",
+            "t": {
+                  "navCalculator": "计算器",
+                  "navPlatforms": "平台",
+                  "navSeo": "搜索词",
+                  "navSaved": "已保存",
+                  "language": "语言",
+                  "country": "国家",
+                  "badge": "100% 本地运行 · 无需注册 · 无数据库",
+                  "heroTitle": "免费创作者收入计算器",
+                  "heroText": "按国家估算网站广告、YouTube、TikTok、Instagram/Reels 以及播客/邮件通讯收入。所有计算都在浏览器本地完成。",
+                  "start": "开始计算",
+                  "example": "加载示例",
+                  "card1Title": "Multi-platform",
+                  "card1Text": "Web, YouTube, TikTok, Reels, podcast and newsletter.",
+                  "card2Title": "Country presets",
+                  "card2Text": "Starter RPM/CPM assumptions by market.",
+                  "card3Title": "SEO coverage",
+                  "card3Text": "Built-in multilingual search term clusters.",
+                  "inputsTitle": "计算输入",
+                  "inputsText": "Choose a platform and adjust assumptions.",
+                  "reset": "Reset",
+                  "scenario": "Scenario name",
+                  "platform": "Platform",
+                  "pageviews": "Monthly pageviews",
+                  "adsPerPage": "Ads per page",
+                  "fillRate": "Fill rate (%)",
+                  "views": "Monthly views / impressions",
+                  "rpmCpm": "RPM / CPM",
+                  "sponsor": "Monthly sponsor income",
+                  "slots": "Sponsor slots",
+                  "growth": "Monthly growth (%)",
+                  "rpmOverride": "Manual RPM override",
+                  "calculate": "计算收入",
+                  "outputTitle": "结果",
+                  "save": "Save",
+                  "monthlyRevenue": "月收入",
+                  "annualRevenue": "年收入",
+                  "effectiveRpm": "Effective RPM/CPM",
+                  "activityMetric": "Clicks / base units",
+                  "projectionTitle": "12-month revenue projection",
+                  "projectionText": "Based on monthly growth",
+                  "tableTitle": "Projection table",
+                  "tableText": "Month-by-month estimate for traffic and monetization targets.",
+                  "month": "Month",
+                  "volume": "Volume",
+                  "revenue": "Revenue",
+                  "supportTitle": "Support free tools",
+                  "supportText": "If this saved you time, support privacy-first browser tools with a coffee-style donation.",
+                  "platformsTitle": "Supported monetization platforms",
+                  "seoTitle": "多语言搜索词覆盖",
+                  "seoIntro": "This tool supports short-tail and long-tail search intents across creator monetization, YouTube income, TikTok earnings, AdSense RPM and sponsorship calculators.",
+                  "shortTail": "短尾关键词",
+                  "longTail": "长尾关键词",
+                  "savedTitle": "Saved scenarios",
+                  "savedText": "Saved locally in this browser only. No backend or database is used.",
+                  "clearAll": "Clear all",
+                  "guideTitle": "Important note about revenue estimates",
+                  "guideP1": "Use the presets as a starting point only. Real earnings depend on niche, country mix, audience quality, ad inventory, viewability, seasonality, platform rules and sponsorship demand.",
+                  "guideP2": "This single-file app is designed for planning and comparison. It does not guarantee any payout and it does not send your inputs to a server."
+            },
+            "short": [
+                  "广告收入计算器",
+                  "YouTube 收入计算器",
+                  "TikTok 收入计算器",
+                  "RPM 计算器",
+                  "创作者收入"
+            ],
+            "long": [
+                  "YouTube 每千次观看收入计算",
+                  "按国家估算 TikTok 创作者收入",
+                  "网站 AdSense RPM 计算器",
+                  "赞助 CPM 计算器"
+            ],
+            "platforms": {
+                  "website": {
+                        "label": "网站 / AdSense",
+                        "text": "规划展示广告、CPC/RPM 与页面浏览收入。"
+                  },
+                  "youtube": {
+                        "label": "YouTube 长视频",
+                        "text": "按观看量、RPM 和赞助估算长视频收入。"
+                  },
+                  "shorts": {
+                        "label": "YouTube Shorts",
+                        "text": "用较低的短视频 RPM 假设估算 Shorts 收入。"
+                  },
+                  "tiktok": {
+                        "label": "TikTok",
+                        "text": "按观看量估算创作者奖励和品牌合作收入。"
+                  },
+                  "instagram": {
+                        "label": "Instagram / Reels",
+                        "text": "估算 Reels、奖金和赞助收入。"
+                  },
+                  "podcast": {
+                        "label": "播客 / 邮件通讯",
+                        "text": "按下载、展示或订阅者估算赞助 CPM 收入。"
+                  }
+            }
+      }
+};
+
+    const fallback = languages.EN.t;
+    let userChangedCountry = false;
+    const countries = {
+      US:{name:'United States', currency:'USD', symbol:'$', locale:'en-US', webRpm:8.5, cpc:.55, youtubeRpm:4.5, shortsRpm:.18, tiktokRpm:.60, instagramRpm:1.2, sponsorCpm:25},
+      GB:{name:'United Kingdom', currency:'GBP', symbol:'£', locale:'en-GB', webRpm:7.2, cpc:.48, youtubeRpm:3.8, shortsRpm:.15, tiktokRpm:.45, instagramRpm:1.0, sponsorCpm:20},
+      DE:{name:'Germany', currency:'EUR', symbol:'€', locale:'de-DE', webRpm:5.8, cpc:.38, youtubeRpm:3.2, shortsRpm:.12, tiktokRpm:.35, instagramRpm:.85, sponsorCpm:18},
+      TR:{name:'Türkiye', currency:'TRY', symbol:'₺', locale:'tr-TR', webRpm:1.1, cpc:.07, youtubeRpm:.65, shortsRpm:.03, tiktokRpm:.08, instagramRpm:.18, sponsorCpm:5},
+      FR:{name:'France', currency:'EUR', symbol:'€', locale:'fr-FR', webRpm:4.8, cpc:.32, youtubeRpm:2.6, shortsRpm:.10, tiktokRpm:.25, instagramRpm:.75, sponsorCpm:15},
+      ES:{name:'Spain', currency:'EUR', symbol:'€', locale:'es-ES', webRpm:3.6, cpc:.24, youtubeRpm:1.9, shortsRpm:.08, tiktokRpm:.20, instagramRpm:.60, sponsorCpm:12},
+      IT:{name:'Italy', currency:'EUR', symbol:'€', locale:'it-IT', webRpm:3.4, cpc:.22, youtubeRpm:1.8, shortsRpm:.07, tiktokRpm:.18, instagramRpm:.55, sponsorCpm:11},
+      NL:{name:'Netherlands', currency:'EUR', symbol:'€', locale:'nl-NL', webRpm:5.2, cpc:.34, youtubeRpm:3.0, shortsRpm:.11, tiktokRpm:.30, instagramRpm:.82, sponsorCpm:17},
+      SE:{name:'Sweden', currency:'SEK', symbol:'kr', locale:'sv-SE', webRpm:5.7, cpc:.36, youtubeRpm:3.1, shortsRpm:.12, tiktokRpm:.32, instagramRpm:.88, sponsorCpm:170},
+      DK:{name:'Denmark', currency:'DKK', symbol:'kr', locale:'da-DK', webRpm:5.9, cpc:.37, youtubeRpm:3.2, shortsRpm:.12, tiktokRpm:.34, instagramRpm:.90, sponsorCpm:130},
+      NO:{name:'Norway', currency:'NOK', symbol:'kr', locale:'nb-NO', webRpm:6.2, cpc:.40, youtubeRpm:3.4, shortsRpm:.13, tiktokRpm:.35, instagramRpm:.95, sponsorCpm:180},
+      FI:{name:'Finland', currency:'EUR', symbol:'€', locale:'fi-FI', webRpm:5.1, cpc:.33, youtubeRpm:2.9, shortsRpm:.11, tiktokRpm:.28, instagramRpm:.80, sponsorCpm:16},
+      CN:{name:'China', currency:'CNY', symbol:'¥', locale:'zh-CN', webRpm:2.5, cpc:.15, youtubeRpm:1.2, shortsRpm:.05, tiktokRpm:.10, instagramRpm:.25, sponsorCpm:45}
+    };
+
+    const platformInfo = {
+      website:{label:'Website / AdSense', text:'Display ads, AdSense-style CPC/RPM and pageview revenue planning.'},
+      youtube:{label:'YouTube Long-form', text:'Estimate long-form video revenue from views, playback RPM and sponsors.'},
+      shorts:{label:'YouTube Shorts', text:'Estimate Shorts income using lower short-form RPM assumptions.'},
+      tiktok:{label:'TikTok', text:'Estimate creator rewards and brand deal income from views.'},
+      instagram:{label:'Instagram / Reels', text:'Estimate Reels, bonus and sponsorship-driven creator income.'},
+      podcast:{label:'Podcast / Newsletter', text:'Estimate sponsor CPM revenue from downloads, impressions or subscribers.'}
+    };
+
+    function currentLang(){ return $('language').value || 'EN'; }
+    function tr(key){ const l = languages[currentLang()] || languages.EN; return (l.t && l.t[key]) || fallback[key] || key; }
+    function currentCountry(){ return countries[$('country').value] || countries.US; }
+    function n(value){ return Math.max(0, Number(value) || 0); }
+    function locale(){ return (languages[currentLang()] || languages.EN).locale || currentCountry().locale || 'en-US'; }
+    function formatMoney(value){ const c = currentCountry(); return new Intl.NumberFormat(locale(), {style:'currency', currency:c.currency, maximumFractionDigits:0}).format(Number(value)||0); }
+    function formatNumber(value){ return new Intl.NumberFormat(locale(), {maximumFractionDigits:0}).format(Number(value)||0); }
+    function escapeHtml(str){ return String(str).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+
+    function initSelects(){
+      $('language').innerHTML = Object.entries(languages).map(([code, data]) => `<option value="${code}">${data.name}</option>`).join('');
+      $('country').innerHTML = Object.entries(countries).map(([code, data]) => `<option value="${code}">${data.name} - ${data.currency}</option>`).join('');
+      $('language').value = 'EN'; $('country').value = 'US';
+    }
+
+    function applyTranslations(){
+      document.documentElement.lang = currentLang().toLowerCase();
+      document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = tr(el.dataset.i18n); });
+      const lang = languages[currentLang()] || languages.EN;
+      document.title = `${tr('heroTitle')} | YouTube, TikTok, AdSense RPM | pratix.io`;
+      const desc = document.querySelector('meta[name="description"]');
+      if(desc) desc.setAttribute('content', tr('heroText'));
+      renderKeywords(lang);
+      renderPlatformOptions();
+      renderPlatformCards();
+      if(latestResult) renderResult(latestResult);
+    }
+
+    function renderKeywords(lang){
+      $('shortKeywords').innerHTML = lang.short.map(k => `<span class="rounded-full bg-white px-3 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-200">${escapeHtml(k)}</span>`).join('');
+      $('longKeywords').innerHTML = lang.long.map(k => `<span class="rounded-full bg-white px-3 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-200">${escapeHtml(k)}</span>`).join('');
+    }
+
+    function platformLabel(key){ return (languages[currentLang()]?.platforms?.[key]?.label) || platformInfo[key]?.label || key; }
+    function platformText(key){ return (languages[currentLang()]?.platforms?.[key]?.text) || platformInfo[key]?.text || ''; }
+
+    function renderPlatformOptions(){
+      const selected = $('platform').value || 'website';
+      $('platform').innerHTML = Object.keys(platformInfo).map(key => `<option value="${key}">${escapeHtml(platformLabel(key))}</option>`).join('');
+      $('platform').value = platformInfo[selected] ? selected : 'website';
+    }
+
+    function renderPlatformCards(){
+      $('platformCards').innerHTML = Object.keys(platformInfo).map(key => `<article class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-sm font-black uppercase tracking-wide text-blue-700">${escapeHtml(key)}</p><h3 class="mt-2 text-xl font-black">${escapeHtml(platformLabel(key))}</h3><p class="mt-2 text-sm leading-6 text-slate-600">${escapeHtml(platformText(key))}</p></article>`).join('');
+    }
+
+    function applyCountryPreset(){
+      const c = currentCountry();
+      $('cpc').value = c.cpc;
+      const p = $('platform').value;
+      if(p === 'website') $('rpmOverride').value = c.webRpm;
+      if(p === 'youtube') $('creatorRpm').value = c.youtubeRpm;
+      if(p === 'shorts') $('creatorRpm').value = c.shortsRpm;
+      if(p === 'tiktok') $('creatorRpm').value = c.tiktokRpm;
+      if(p === 'instagram') $('creatorRpm').value = c.instagramRpm;
+      if(p === 'podcast') $('creatorRpm').value = c.sponsorCpm;
+    }
+
+    function syncLanguageCountry(){
+      const lang = languages[currentLang()];
+      if(!userChangedCountry && lang && lang.country && countries[lang.country]) $('country').value = lang.country;
+      applyCountryPreset();
+      calculateAndRender();
+    }
+
+    function updatePlatformUI(){
+      const p = $('platform').value;
+      $('webInputs').classList.toggle('hidden-panel', p !== 'website');
+      $('creatorInputs').classList.toggle('hidden-panel', p === 'website');
+      $('slotsWrap').classList.toggle('hidden-panel', p !== 'podcast');
+      applyCountryPreset();
+    }
+
+    function readInputs(){
+      return { name:$('scenarioName').value.trim() || 'Untitled Scenario', platform:$('platform').value, country:$('country').value, pageviews:n($('pageviews').value), adsPerPage:n($('adsPerPage').value), ctr:n($('ctr').value), cpc:n($('cpc').value), fillRate:Math.min(100,n($('fillRate').value)), views:n($('views').value), creatorRpm:n($('creatorRpm').value), sponsorIncome:n($('sponsorIncome').value), slots:Math.max(1,n($('slots').value)||1), growth:Math.max(-99, Number($('growth').value)||0), rpmOverride:$('rpmOverride').value === '' ? null : n($('rpmOverride').value) };
+    }
+
+    function calculateRevenue(input){
+      let baseUnits = 0, revenue = 0, clicks = 0, rpm = 0, metricLabel = '—';
+      if(input.platform === 'website'){
+        baseUnits = input.pageviews;
+        const adRequests = input.pageviews * input.adsPerPage;
+        const filledImpressions = adRequests * (input.fillRate / 100);
+        clicks = filledImpressions * (input.ctr / 100);
+        const clickRevenue = clicks * input.cpc;
+        revenue = input.rpmOverride !== null ? (input.pageviews / 1000) * input.rpmOverride : clickRevenue;
+        rpm = input.pageviews > 0 ? revenue / input.pageviews * 1000 : 0;
+        metricLabel = formatNumber(clicks);
+      } else if(input.platform === 'podcast'){
+        baseUnits = input.views;
+        revenue = (input.views / 1000) * input.creatorRpm * input.slots;
+        rpm = input.views > 0 ? revenue / input.views * 1000 : 0;
+        metricLabel = formatNumber(input.views) + ' × ' + input.slots;
+      } else {
+        baseUnits = input.views;
+        revenue = (input.views / 1000) * input.creatorRpm + input.sponsorIncome;
+        rpm = input.views > 0 ? revenue / input.views * 1000 : 0;
+        metricLabel = formatNumber(input.views);
+      }
+      const projection = Array.from({length:12}, (_,i) => {
+        const volume = baseUnits * Math.pow(1 + input.growth/100, i);
+        const rev = input.platform === 'website' ? revenue * Math.pow(1 + input.growth/100, i) : (input.platform === 'podcast' ? (volume/1000)*input.creatorRpm*input.slots : (volume/1000)*input.creatorRpm + input.sponsorIncome);
+        return {month:i+1, volume, revenue:rev, rpm: volume > 0 ? rev/volume*1000 : 0};
+      });
+      return { ...input, monthlyRevenue:revenue, annualRevenue:revenue*12, rpm, metricLabel, projection };
+    }
+
+    function renderResult(result){
+      latestResult = result;
+      $('monthlyRevenue').textContent = formatMoney(result.monthlyRevenue);
+      $('annualRevenue').textContent = formatMoney(result.annualRevenue);
+      $('effectiveRpm').textContent = formatMoney(result.rpm);
+      $('activityMetric').textContent = result.metricLabel;
+      $('summaryText').textContent = `${platformLabel(result.platform)} · ${countries[result.country].name} · ${formatMoney(result.monthlyRevenue)} / month`;
+      $('projectionTable').innerHTML = result.projection.map(r => `<tr><td class="py-3 pr-4">${r.month}</td><td class="py-3 pr-4">${formatNumber(r.volume)}</td><td class="py-3 pr-4 font-bold text-blue-700">${formatMoney(r.revenue)}</td><td class="py-3 pr-4">${formatMoney(r.rpm)}</td></tr>`).join('');
+      const labels = result.projection.map(r => 'M' + r.month);
+      const data = result.projection.map(r => Math.round(r.revenue));
+      if(chart) chart.destroy();
+      chart = new Chart($('revenueChart'), {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Revenue',
+            data,
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37,99,235,.12)',
+            tension: .35,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { ticks: { callback: v => formatMoney(v) } } }
+        }
+      });
+    }
+
+    function calculateAndRender(){ renderResult(calculateRevenue(readInputs())); }
+    function getSaved(){ try { return JSON.parse(localStorage.getItem(storageKey) || '[]'); } catch { return []; } }
+    function setSaved(items){ localStorage.setItem(storageKey, JSON.stringify(items)); renderSaved(); }
+    function renderSaved(){
+      const saved = getSaved();
+      $('savedScenarios').innerHTML = saved.length ? saved.map((s,i) => `<article class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200"><p class="font-black">${escapeHtml(s.name)}</p><p class="mt-1 text-sm text-slate-500">${escapeHtml(platformLabel(s.platform))} · ${escapeHtml(countries[s.country]?.name || s.country)}</p><p class="mt-2 text-xl font-black text-blue-700">${formatMoney(s.monthlyRevenue)}</p><button class="mt-3 rounded-xl border border-slate-300 px-3 py-2 text-sm font-bold" onclick="loadSaved(${i})">Load</button></article>`).join('') : '<p class="text-sm text-slate-500">No saved scenarios yet.</p>';
+    }
+    window.loadSaved = function(i){ const s = getSaved()[i]; if(!s) return; $('platform').value=s.platform; $('country').value=s.country; $('scenarioName').value=s.name; updatePlatformUI(); $('pageviews').value=s.pageviews||0; $('adsPerPage').value=s.adsPerPage||3; $('ctr').value=s.ctr||1.2; $('cpc').value=s.cpc||.55; $('fillRate').value=s.fillRate||92; $('views').value=s.views||0; $('creatorRpm').value=s.creatorRpm||0; $('sponsorIncome').value=s.sponsorIncome||0; $('slots').value=s.slots||1; $('growth').value=s.growth||0; $('rpmOverride').value=s.rpmOverride ?? ''; calculateAndRender(); };
+
+    $('calcForm').addEventListener('submit', e => { e.preventDefault(); calculateAndRender(); });
+    $('calcForm').addEventListener('input', calculateAndRender);
+    $('platform').addEventListener('change', () => { updatePlatformUI(); calculateAndRender(); });
+    $('country').addEventListener('change', () => { userChangedCountry = true; applyCountryPreset(); calculateAndRender(); });
+    $('language').addEventListener('change', () => { applyTranslations(); syncLanguageCountry(); });
+    $('loadExampleBtn').addEventListener('click', () => { $('platform').value='youtube'; $('views').value=500000; $('sponsorIncome').value=750; $('growth').value=5; updatePlatformUI(); calculateAndRender(); });
+    $('saveScenarioBtn').addEventListener('click', () => { if(!latestResult) calculateAndRender(); const saved = getSaved(); saved.unshift({...latestResult, savedAt:new Date().toISOString()}); setSaved(saved.slice(0,9)); });
+    $('clearSavedBtn').addEventListener('click', () => setSaved([]));
+    $('pdfBtn').addEventListener('click', () => { if(!latestResult) calculateAndRender(); const { jsPDF } = window.jspdf; const doc = new jsPDF(); doc.setFontSize(18); doc.text('pratix.io Creator Revenue Estimate', 14, 20); doc.setFontSize(11); doc.text(`Scenario: ${latestResult.name}`, 14, 34); doc.text(`Platform: ${platformLabel(latestResult.platform)}`, 14, 42); doc.text(`Country: ${countries[latestResult.country].name}`, 14, 50); doc.text(`Monthly: ${formatMoney(latestResult.monthlyRevenue)}`, 14, 62); doc.text(`Annual: ${formatMoney(latestResult.annualRevenue)}`, 14, 70); doc.text(`Effective RPM/CPM: ${formatMoney(latestResult.rpm)}`, 14, 78); doc.text('Note: Planning estimate only. Real earnings vary by platform, niche and audience.', 14, 94); doc.save('pratix-creator-revenue-estimate.pdf'); });
+
+    initSelects();
+    renderPlatformOptions();
+    renderPlatformCards();
+    applyTranslations();
+    updatePlatformUI();
+    calculateAndRender();
+    renderSaved();
+  </script>
+</body>
+</html>
