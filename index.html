@@ -1630,20 +1630,41 @@ body:has(nav.nav):not(.light) footer {
 
     const fallback = languages.EN.t;
     let userChangedCountry = false;
+    // Country presets refreshed 2026-09-03. Monetary values are local-currency planning benchmarks.
+    // Website RPM: RITS Ads Network 2026 display-RPM midpoint; YouTube RPM: Dynamoi creator RPM through 2026-08-30.
+    // CPC: Adbenchly June/July 2026 modeled local-currency table. Shorts: conservative 1% long-form RPM proxy.
+    // TikTok Creator Rewards is set only for TikTok's officially listed eligible countries; Instagram native RPM is 0
+    // because Meta does not publish a universal country payout table. Sponsor CPM is a scaled planning proxy, not a quote.
     const countries = {
-      US:{name:'United States', currency:'USD', symbol:'$', locale:'en-US', webRpm:8.5, cpc:.55, youtubeRpm:4.5, shortsRpm:.18, tiktokRpm:.60, instagramRpm:1.2, sponsorCpm:25},
-      GB:{name:'United Kingdom', currency:'GBP', symbol:'£', locale:'en-GB', webRpm:7.2, cpc:.48, youtubeRpm:3.8, shortsRpm:.15, tiktokRpm:.45, instagramRpm:1.0, sponsorCpm:20},
-      DE:{name:'Germany', currency:'EUR', symbol:'€', locale:'de-DE', webRpm:5.8, cpc:.38, youtubeRpm:3.2, shortsRpm:.12, tiktokRpm:.35, instagramRpm:.85, sponsorCpm:18},
-      TR:{name:'Türkiye', currency:'TRY', symbol:'₺', locale:'tr-TR', webRpm:1.1, cpc:.07, youtubeRpm:.65, shortsRpm:.03, tiktokRpm:.08, instagramRpm:.18, sponsorCpm:5},
-      FR:{name:'France', currency:'EUR', symbol:'€', locale:'fr-FR', webRpm:4.8, cpc:.32, youtubeRpm:2.6, shortsRpm:.10, tiktokRpm:.25, instagramRpm:.75, sponsorCpm:15},
-      ES:{name:'Spain', currency:'EUR', symbol:'€', locale:'es-ES', webRpm:3.6, cpc:.24, youtubeRpm:1.9, shortsRpm:.08, tiktokRpm:.20, instagramRpm:.60, sponsorCpm:12},
-      IT:{name:'Italy', currency:'EUR', symbol:'€', locale:'it-IT', webRpm:3.4, cpc:.22, youtubeRpm:1.8, shortsRpm:.07, tiktokRpm:.18, instagramRpm:.55, sponsorCpm:11},
-      NL:{name:'Netherlands', currency:'EUR', symbol:'€', locale:'nl-NL', webRpm:5.2, cpc:.34, youtubeRpm:3.0, shortsRpm:.11, tiktokRpm:.30, instagramRpm:.82, sponsorCpm:17},
-      SE:{name:'Sweden', currency:'SEK', symbol:'kr', locale:'sv-SE', webRpm:5.7, cpc:.36, youtubeRpm:3.1, shortsRpm:.12, tiktokRpm:.32, instagramRpm:.88, sponsorCpm:170},
-      DK:{name:'Denmark', currency:'DKK', symbol:'kr', locale:'da-DK', webRpm:5.9, cpc:.37, youtubeRpm:3.2, shortsRpm:.12, tiktokRpm:.34, instagramRpm:.90, sponsorCpm:130},
-      NO:{name:'Norway', currency:'NOK', symbol:'kr', locale:'nb-NO', webRpm:6.2, cpc:.40, youtubeRpm:3.4, shortsRpm:.13, tiktokRpm:.35, instagramRpm:.95, sponsorCpm:180},
-      FI:{name:'Finland', currency:'EUR', symbol:'€', locale:'fi-FI', webRpm:5.1, cpc:.33, youtubeRpm:2.9, shortsRpm:.11, tiktokRpm:.28, instagramRpm:.80, sponsorCpm:16},
-      CN:{name:'China', currency:'CNY', symbol:'¥', locale:'zh-CN', webRpm:2.5, cpc:.15, youtubeRpm:1.2, shortsRpm:.05, tiktokRpm:.10, instagramRpm:.25, sponsorCpm:45}
+      US:{name:'United States', currency:'USD', symbol:'$', locale:'en-US', webRpm:19, cpc:2.69, youtubeRpm:5.79, shortsRpm:0.06, tiktokRpm:0.3, instagramRpm:0, sponsorCpm:25},
+      GB:{name:'United Kingdom', currency:'GBP', symbol:'£', locale:'en-GB', webRpm:10.75, cpc:1.64, youtubeRpm:4.43, shortsRpm:0.04, tiktokRpm:0.22, instagramRpm:0, sponsorCpm:14.15},
+      DE:{name:'Germany', currency:'EUR', symbol:'€', locale:'de-DE', webRpm:8.64, cpc:1.67, youtubeRpm:1.71, shortsRpm:0.02, tiktokRpm:0.26, instagramRpm:0, sponsorCpm:11.36},
+      TR:{name:'Türkiye', currency:'TRY', symbol:'₺', locale:'tr-TR', webRpm:45.88, cpc:15.49, youtubeRpm:7.73, shortsRpm:0.08, tiktokRpm:0, instagramRpm:0, sponsorCpm:60.37},
+      FR:{name:'France', currency:'EUR', symbol:'€', locale:'fr-FR', webRpm:6.91, cpc:1.36, youtubeRpm:1.96, shortsRpm:0.02, tiktokRpm:0.26, instagramRpm:0, sponsorCpm:9.09},
+      ES:{name:'Spain', currency:'EUR', symbol:'€', locale:'es-ES', webRpm:4.75, cpc:0.99, youtubeRpm:1.69, shortsRpm:0.02, tiktokRpm:0, instagramRpm:0, sponsorCpm:6.25},
+      IT:{name:'Italy', currency:'EUR', symbol:'€', locale:'it-IT', webRpm:4.75, cpc:1.04, youtubeRpm:2.02, shortsRpm:0.02, tiktokRpm:0, instagramRpm:0, sponsorCpm:6.25},
+      NL:{name:'Netherlands', currency:'EUR', symbol:'€', locale:'nl-NL', webRpm:7.34, cpc:1.48, youtubeRpm:4.24, shortsRpm:0.04, tiktokRpm:0, instagramRpm:0, sponsorCpm:9.66},
+      SE:{name:'Sweden', currency:'SEK', symbol:'kr', locale:'sv-SE', webRpm:77.09, cpc:38.82, youtubeRpm:35.17, shortsRpm:0.35, tiktokRpm:0, instagramRpm:0, sponsorCpm:101.44},
+      DK:{name:'Denmark', currency:'DKK', symbol:'kr', locale:'da-DK', webRpm:103.3, cpc:30.5, youtubeRpm:53.52, shortsRpm:0.54, tiktokRpm:0, instagramRpm:0, sponsorCpm:135.92},
+      NO:{name:'Norway', currency:'NOK', symbol:'kr', locale:'nb-NO', webRpm:163.38, cpc:49.93, youtubeRpm:68.71, shortsRpm:0.69, tiktokRpm:0, instagramRpm:0, sponsorCpm:214.97},
+      FI:{name:'Finland', currency:'EUR', symbol:'€', locale:'fi-FI', webRpm:11.23, cpc:1.01, youtubeRpm:5.26, shortsRpm:0.05, tiktokRpm:0, instagramRpm:0, sponsorCpm:14.77},
+      AU:{name:'Australia', currency:'AUD', symbol:'A$', locale:'en-AU', webRpm:29.38, cpc:3.34, youtubeRpm:11.1, shortsRpm:0.11, tiktokRpm:0, instagramRpm:0, sponsorCpm:38.66},
+      CA:{name:'Canada', currency:'CAD', symbol:'CA$', locale:'en-CA', webRpm:22.28, cpc:3.17, youtubeRpm:8.01, shortsRpm:0.08, tiktokRpm:0, instagramRpm:0, sponsorCpm:29.32},
+      NZ:{name:'New Zealand', currency:'NZD', symbol:'NZ$', locale:'en-NZ', webRpm:25.74, cpc:3.02, youtubeRpm:9.21, shortsRpm:0.09, tiktokRpm:0, instagramRpm:0, sponsorCpm:33.87},
+      CH:{name:'Switzerland', currency:'CHF', symbol:'CHF', locale:'de-CH', webRpm:13.84, cpc:5.54, youtubeRpm:5.15, shortsRpm:0.05, tiktokRpm:0, instagramRpm:0, sponsorCpm:18.21},
+      AT:{name:'Austria', currency:'EUR', symbol:'€', locale:'de-AT', webRpm:10.8, cpc:0.92, youtubeRpm:3.53, shortsRpm:0.04, tiktokRpm:0, instagramRpm:0, sponsorCpm:14.21},
+      BE:{name:'Belgium', currency:'EUR', symbol:'€', locale:'nl-BE', webRpm:9.5, cpc:0.97, youtubeRpm:4.35, shortsRpm:0.04, tiktokRpm:0, instagramRpm:0, sponsorCpm:12.5},
+      IE:{name:'Ireland', currency:'EUR', symbol:'€', locale:'en-IE', webRpm:11.23, cpc:2.07, youtubeRpm:4.09, shortsRpm:0.04, tiktokRpm:0, instagramRpm:0, sponsorCpm:14.77},
+      JP:{name:'Japan', currency:'JPY', symbol:'¥', locale:'ja-JP', webRpm:1196.97, cpc:194, youtubeRpm:499.53, shortsRpm:5, tiktokRpm:47.88, instagramRpm:0, sponsorCpm:1574.96},
+      KR:{name:'South Korea', currency:'KRW', symbol:'₩', locale:'ko-KR', webRpm:9537.91, cpc:1525, youtubeRpm:3760.66, shortsRpm:37.61, tiktokRpm:408.77, instagramRpm:0, sponsorCpm:12549.88},
+      SG:{name:'Singapore', currency:'SGD', symbol:'S$', locale:'en-SG', webRpm:10.19, cpc:2.25, youtubeRpm:6.56, shortsRpm:0.07, tiktokRpm:0, instagramRpm:0, sponsorCpm:13.4},
+      AE:{name:'United Arab Emirates', currency:'AED', symbol:'AED', locale:'ar-AE', webRpm:25.71, cpc:8.39, youtubeRpm:10.65, shortsRpm:0.11, tiktokRpm:0, instagramRpm:0, sponsorCpm:33.83},
+      BR:{name:'Brazil', currency:'BRL', symbol:'R$', locale:'pt-BR', webRpm:6.7, cpc:4.17, youtubeRpm:1.8, shortsRpm:0.02, tiktokRpm:1.55, instagramRpm:0, sponsorCpm:8.81},
+      MX:{name:'Mexico', currency:'MXN', symbol:'MX$', locale:'es-MX', webRpm:19.55, cpc:27.73, youtubeRpm:5.95, shortsRpm:0.06, tiktokRpm:5.1, instagramRpm:0, sponsorCpm:25.72},
+      ZA:{name:'South Africa', currency:'ZAR', symbol:'R', locale:'en-ZA', webRpm:14.48, cpc:13.85, youtubeRpm:3.86, shortsRpm:0.04, tiktokRpm:0, instagramRpm:0, sponsorCpm:19.06},
+      PL:{name:'Poland', currency:'PLN', symbol:'zł', locale:'pl-PL', webRpm:15.88, cpc:3.05, youtubeRpm:3.89, shortsRpm:0.04, tiktokRpm:0, instagramRpm:0, sponsorCpm:20.9},
+      // China has no direct row in the selected publisher-RPM source; retain a transparent secondary planning proxy.
+      CN:{name:'China', currency:'CNY', symbol:'¥', locale:'zh-CN', webRpm:0, cpc:0, youtubeRpm:3.7, shortsRpm:0.04, tiktokRpm:0, instagramRpm:0, sponsorCpm:0}
     };
 
     const platformInfo = {
